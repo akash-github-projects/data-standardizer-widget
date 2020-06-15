@@ -226,6 +226,11 @@ def info():
             info_widget.clear_output()
             df_data.info()
 
+        display(print4("Note: All rows containing Null/NA/NaN values will not be standardized and will be "
+                       "retained as is in final dataset. For a brief summary of missing values go to Data Summary "
+                       "section. If you want more options to handle missing values, "
+                       "please use the Data Imputation Widget on AnalyTechs Marketplace."))
+
     return info_widget
 
 
