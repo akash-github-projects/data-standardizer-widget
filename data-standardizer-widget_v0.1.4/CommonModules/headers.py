@@ -12,52 +12,30 @@ warnings.filterwarnings('ignore')
 
 
 def fcn_display_headers(imgname="analytechs_widget.jpg"):
-    """
-    Purpose : To display header in the widget
-    Parameters : None
-
-    """
-
     output = widgets.Output()
     with output:
         js = '''
-        var code_show=true; 
-        function code_toggle() {
+               function code_toggle() {
+                if (document.getElementById('switch-orange').checked){
+                $('div.input').show();
+                } else {
+                $('div.input').hide();
+                }
+                code_show = !code_show
+               } 
+               $( document ).ready(code_toggle);
+               setInterval(code_toggle,1000);
 
-         if (code_show){
-         $('div.input').hide();
-         } else {
-         $('div.input').show();
-         }
-         code_show = !code_show
-        } 
-        $( document ).ready(code_toggle);
-
-        '''
+               '''
         js = Javascript(js)
         display(js)
 
-        js2 = '''
-        var code_show=false;
-        $(document).ready(function() {
-          $('#switch-orange').change(function() {
-            if (code_show){
-         $('div.input').hide();
-         } else {
-         $('div.input').show();
-         }
-         code_show = !code_show
-          });
-        });
-        '''
-        js2 = Javascript(js2)
-        display(js2)
-
         display(HTML('''<meta charset="utf-8">
+        <link rel="stylesheet" href="Resources/SupportFiles/css/generic_design.css">
 
         <form class='toggles' action="javascript:IPython.notebook.execute_cells_below()">
                 <button type="submit" id="toggleButton" style="position:relative; float:right; border:none; background-color:white; padding-top:5px; padding-right:30px;">
-                    <img src = "./Resources/SupportFiles/images/refresh_icon.png" />
+                    <img src = "Resources/SupportFiles/images/refresh_icon.png" />
                    <span class="tooltiptext">Reset</span>
                 </button>
                 <div class="code-toggle">
@@ -86,9 +64,8 @@ def fcn_display_headers(imgname="analytechs_widget.jpg"):
 
         display(HTML("<style>.container { width:98% !important; }</style>"))
 
-        display(
-            Image(filename="Resources" + os.sep + "SupportFiles" + os.sep + "images" + os.sep + imgname,
-                  width="1500px", height="230px"))
+        display(Image(filename="Resources" + os.sep + "SupportFiles" + os.sep + "images" + os.sep + imgname,
+                      width="1500px", height="230px"))
 
         display(HTML('<style>.prompt{width: 0px; min-width: 0px; visibility: collapse}</style>'))
 
